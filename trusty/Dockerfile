@@ -15,6 +15,7 @@ RUN apt-get -y --no-install-recommends install \
     vim
 
 RUN apt-get -y --no-install-recommends install ubuntu-dev-tools
+RUN apt-get -y --no-install-recommends install pkg-create-dbgsym
 
 RUN apt-get clean
 

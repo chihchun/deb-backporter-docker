@@ -16,6 +16,7 @@ RUN apt-get -y --no-install-recommends install \
 
 RUN apt-get -y --no-install-recommends install arriero
 RUN apt-get -y --no-install-recommends install ubuntu-dev-tools
+RUN apt-get -y --no-install-recommends install pkg-create-dbgsym
 
 RUN apt-get clean
 
