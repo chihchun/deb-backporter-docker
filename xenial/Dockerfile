@@ -1,20 +1,21 @@
-
 FROM ubuntu:xenial
 MAINTAINER Rex Tsai "http://about.me/chihchun"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN sed -i "/^# deb.*universe/ s/^# //" /etc/apt/sources.list
 RUN sed -i "/^# deb.*multiverse/ s/^# //" /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get -y dist-upgrade
+RUN apt-get update && apt-get -y dist-upgrade
 RUN apt-get -y --no-install-recommends install \
-    ubuntu-dev-tools \
-    devscripts \
-    equivs \
-    cdbs \
     build-essential \
-    git \
-    git-buildpackage
+    devscripts \
+    sbuild \
+    cdbs \
+    equivs \
+    git-buildpackage \
+    vim
+
+RUN apt-get -y --no-install-recommends install arriero
+RUN apt-get -y --no-install-recommends install ubuntu-dev-tools
 
 RUN apt-get clean
 
@@ -25,7 +26,8 @@ RUN echo "ALL ALL=NOPASSWD: /usr/bin/apt-get,/usr/bin/dpkg,/usr/bin/mk-build-dep
 
 ADD build.sh /usr/local/bin/build.sh
 RUN chmod 755 /usr/local/bin/build.sh
-RUN useradd --create-home ubuntu
-USER ubuntu
-WORKDIR /home/ubuntu/build
+RUN useradd --create-home builder
+VOLUME /home/builder
+USER builder
+WORKDIR /home/builder/build
 CMD /usr/local/bin/build.sh
