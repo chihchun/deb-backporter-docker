@@ -2,8 +2,8 @@ FROM debian:stretch
 MAINTAINER Rex Tsai "http://about.me/chihchun"
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN sed -i "/^# deb.*universe/ s/^# //" /etc/apt/sources.list
-RUN sed -i "/^# deb.*multiverse/ s/^# //" /etc/apt/sources.list
+RUN sed -i -e 's/main/main contrib non-free/g' /etc/apt/sources.list
+
 RUN apt-get update && apt-get -y dist-upgrade
 RUN apt-get -y --no-install-recommends install \
     build-essential \
