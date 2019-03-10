@@ -17,6 +17,7 @@ It includes
 
 * Ubuntu 14.04 - chihchun/deb-backporter:trusty
 * Ubuntu 16.04 - chihchun/deb-backporter:xenial
+* Ubuntu 18.04 - chihchun/deb-backporter:bionic
 * Debian 8 - chihchun/deb-backporter:jessie
 * Debian 9 - chihchun/deb-backporter:stretch
 
@@ -28,6 +29,7 @@ It includes
     
     # The docker entry point command will install the dependency of the pacakge, and run dpkg-buildpackage
     # You can see the build.sh for more details.
-    docker run -t -i -v `pwd`:/home/builder/build -v /home/builder --rm chihchun/deb-backporter:xenial
+    # Built deb files can be located at /home/builder
+    docker run -t -i -v `pwd`:/home/builder/build -v /home/builder --rm chihchun/deb-backporter:bionic
     # If you like to get a shell for developerment, just pass bash in
-    docker run -t -i -v `pwd`:/home/builder/build -v /home/builder --rm chihchun/deb-backporter:xenial bash
+    docker run -t -i -v `pwd`:/home/builder/build -v /home/builder --rm chihchun/deb-backporter:bionic bash
