@@ -1,9 +1,9 @@
-FROM debian:jessie
+FROM ubuntu:jammy
 MAINTAINER Rex Tsai "http://about.me/chihchun"
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN sed -i -e 's/main/main contrib non-free/g' /etc/apt/sources.list
-
+RUN sed -i "/^# deb.*universe/ s/^# //" /etc/apt/sources.list
+RUN sed -i "/^# deb.*multiverse/ s/^# //" /etc/apt/sources.list
 RUN apt-get update && apt-get -y dist-upgrade
 RUN apt-get -y --no-install-recommends install \
     build-essential \
@@ -15,13 +15,18 @@ RUN apt-get -y --no-install-recommends install \
     vim
 
 RUN apt-get -y --no-install-recommends install arriero
+RUN apt-get -y --no-install-recommends install ubuntu-dev-tools
+# RUN apt-get -y --no-install-recommends install pkg-create-dbgsym
 
 RUN apt-get clean
 
 # Setup sudo for apt-get
 RUN apt-get install -y sudo
-RUN echo "ALL ALL=NOPASSWD: /usr/bin/apt-get,/usr/bin/dpkg,/usr/bin/mk-build-deps" >> /etc/sudoers.d/apt-get \                                             
+RUN echo "ALL ALL=NOPASSWD: /usr/bin/apt, /usr/bin/apt-get,/usr/bin/dpkg,/usr/bin/mk-build-deps" >> /etc/sudoers.d/apt-get \
  && chmod 0440 /etc/sudoers.d/apt-get
+ RUN echo "ALL ALL=NOPASSWD: ALL" >> /etc/sudoers.d/superuser \
+ && chmod 0440 /etc/sudoers.d/superuser
+
 
 ADD build.sh /usr/local/bin/build.sh
 RUN chmod 755 /usr/local/bin/build.sh

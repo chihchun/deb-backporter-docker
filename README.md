@@ -18,7 +18,9 @@ It includes
 * Ubuntu 14.04 - chihchun/deb-backporter:trusty
 * Ubuntu 16.04 - chihchun/deb-backporter:xenial
 * Ubuntu 18.04 - chihchun/deb-backporter:bionic
-* Debian 8 - chihchun/deb-backporter:jessie
+* Ubuntu 20.04 - chihchun/deb-backporter:focal
+* Ubuntu 22.04 - chihchun/deb-backporter:jammy
+* Ubuntu 24.04 - chihchun/deb-backporter:noble
 * Debian 9 - chihchun/deb-backporter:stretch
 
 ## Usage
